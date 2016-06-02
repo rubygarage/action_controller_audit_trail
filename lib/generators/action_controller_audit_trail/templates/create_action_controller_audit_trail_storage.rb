@@ -6,8 +6,9 @@ class CreateActionControllerAuditTrailStorage < ActiveRecord::Migration
       t.string   :controller, null: false
       t.string   :action, null: false
       t.string   :actor_id
+      t.boolean  :has_errors, null: false, default: false
       t.datetime :created_at, null: false
     end
-    add_index :action_controller_audit_trail_storage, [:trackable_class, :trackable_id]
+    add_index :action_controller_audit_trail_storage, [:trackable_class, :trackable_id], name: 'by_id_class'
   end
 end

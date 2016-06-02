@@ -2,17 +2,15 @@ require 'rails/generators/base'
 require 'rails/generators'
 require 'rails/generators/active_record'
 
-puts 'something'
 module ActionControllerAuditTrail
   module Generators
-    class SetupGenerator < Rails::Generators::NamedBase
+    class SetupGenerator < Rails::Generators::Base
       include ::Rails::Generators::Migration
       source_root File.expand_path('../templates', __FILE__)
 
       desc 'Generates (but does not run) a migration to add a audit trail table.'
-
       def create_migration_file
-        add_audit_trail_migration('create_audit_trail_storage')
+        add_audit_trail_migration('create_action_controller_audit_trail_storage')
       end
 
       def self.next_migration_number(dirname)

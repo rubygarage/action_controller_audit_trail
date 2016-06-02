@@ -1,7 +1,7 @@
 module ActionControllerAuditTrail
   module Base
-    def auditable(auditable_key, options = {})
-      after_action(:publish_audit_trail, options.slice(:if, :unless))
+    def trackable(trackable_key, options = {})
+      after_action(:publish_audit_trail, options.slice(:if, :unless, :only, :except))
 
       define_method :publish_audit_trail do
         ActionControllerAuditTrail::ReportConstructor.new(
@@ -12,8 +12,8 @@ module ActionControllerAuditTrail
         ).create(self)
       end
 
-      define_method :publishable do
-        @publishable ||= instance_variable_get(:"@#{auditable_key}").present?
+      define_method :trackable do
+        @trackable ||= instance_variable_get(:"@#{trackable_key}").presence
       end
     end
   end

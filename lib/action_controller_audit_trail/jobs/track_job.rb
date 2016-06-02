@@ -6,7 +6,7 @@ module ActionControllerAuditTrail
       include SuckerPunch::Job
 
       def perform(*args)
-        ActionControllerAuditTrail::Tracker.new(*args).track
+        ActionControllerAuditTrail::Tracker.new.track(*args)
       end
     end
   end
